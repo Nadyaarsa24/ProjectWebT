@@ -1,3 +1,10 @@
+<?php
+// session_start(); // Jika Anda menggunakan session, pastikan ini ada di paling atas
+// if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+//     header('Location: login.php');
+//     exit;
+// }
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -36,22 +43,20 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom scrollbar for dark theme */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #1f2937; /* bg-gray-800 */
+            background: #1f2937; 
         }
         ::-webkit-scrollbar-thumb {
-            background: #4b5563; /* bg-gray-600 */
+            background: #4b5563; 
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #6b7280; /* bg-gray-500 */
+            background: #6b7280; 
         }
-        /* Untuk line-clamp */
         .line-clamp-3 {
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -64,7 +69,7 @@
 <body class="bg-primary text-gray-300">
     <header class="bg-primary shadow-md fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            <a href="dashboard.php" class="text-2xl font-['Pacifico'] text-secondary">logo</a>
+            <a href="dashboard.php" class="text-2xl font-['Pacifico'] text-secondary">BANSUSS</a>
             <div class="flex items-center space-x-3 sm:space-x-4">
                 <div class="relative">
                     <button id="notifications-btn"
@@ -107,13 +112,6 @@
                     </div>
                     <span>Pendaftar</span>
                 </a>
-                <a href="matakuliah.php" 
-                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
-                    <div class="w-5 h-5 flex items-center justify-center">
-                        <i class="ri-book-2-line"></i>
-                    </div>
-                    <span>Mata Kuliah</span>
-                </a>
                 <a href="jadwal_wawancara.php"
                     class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg"> 
                     <div class="w-5 h-5 flex items-center justify-center">
@@ -122,7 +120,8 @@
                     <span>Jadwal Wawancara</span>
                 </a>
                 <a href="pengumuman_admin.php" 
-                    class="flex items-center space-x-3 px-4 py-3 text-secondary bg-gray-700 rounded-lg"> <div class="w-5 h-5 flex items-center justify-center">
+                    class="flex items-center space-x-3 px-4 py-3 text-secondary bg-gray-700 rounded-lg"> 
+                    <div class="w-5 h-5 flex items-center justify-center">
                         <i class="ri-megaphone-line"></i>
                     </div>
                     <span>Pengumuman</span>
@@ -180,7 +179,7 @@
                     ];
 
                     foreach ($pengumuman_list as $pengumuman): 
-                        $status_color = 'text-gray-400 bg-gray-600/30'; // Default
+                        $status_color = 'text-gray-400 bg-gray-600/30'; 
                         $status_icon = 'ri-draft-line';
                         if ($pengumuman['status'] == 'Dipublikasikan') {
                             $status_color = 'text-green-400 bg-green-500/20';
@@ -247,28 +246,28 @@
             <a href="#profile" class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-secondary"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-user-line"></i></div><span>Profile</span></a>
             <a href="pengaturan_admin.php" class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-secondary"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-settings-3-line"></i></div><span>Settings</span></a>
             <hr class="my-1 border-gray-700">
-            <a href="#logout" class="flex items-center space-x-3 px-4 py-2 text-sm text-red-400 hover:bg-gray-700 hover:text-red-300"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-logout-box-line"></i></div><span>Logout</span></a>
+            <a href="login.php?action=logout" class="flex items-center space-x-3 px-4 py-2 text-sm text-red-400 hover:bg-gray-700 hover:text-red-300"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-logout-box-line"></i></div><span>Logout</span></a>
         </div>
     </div>
     <div id="mobile-menu" class="fixed inset-0 bg-primary z-[60] hidden flex-col pt-0 md:hidden">
         <div class="flex justify-between items-center p-4 border-b border-gray-700">
-            <a href="dashboard.php" class="text-xl font-['Pacifico'] text-secondary">logo</a>
+            <a href="dashboard.php" class="text-xl font-['Pacifico'] text-secondary">BANSUSS</a>
             <button id="close-mobile-menu-button" title="Tutup Menu" aria-label="Tutup Menu" class="p-2 text-gray-200 hover:text-secondary focus:outline-none">
                 <i class="ri-close-line ri-xl"></i>
             </button>
         </div>
-        <div class="container mx-auto px-4 py-4">
+        <div class="container mx-auto px-4 py-4 flex-1 overflow-y-auto">
             <a href="dashboard.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Dashboard</a>
             <a href="pendaftar.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Pendaftar</a>
-            <a href="matakuliah.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Mata Kuliah</a>
             <a href="jadwal_wawancara.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Jadwal Wawancara</a> 
-            <a href="pengumuman_admin.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-secondary bg-gray-700/50 rounded">Pengumuman</a> <a href="pengaturan_admin.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Pengaturan</a>
+            <a href="pengumuman_admin.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-secondary bg-gray-700/50 rounded">Pengumuman</a> 
+            <a href="pengaturan_admin.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Pengaturan</a>
             <div class="mt-4 border-t border-gray-700 pt-4">
                  <a href="#profile" class="flex items-center space-x-3 px-0 py-3 text-lg text-gray-200 hover:text-secondary">
                     <div class="w-5 h-5 flex items-center justify-center"><i class="ri-user-line"></i></div>
                     <span>Profile</span>
                 </a>
-                <a href="#logout" class="flex items-center space-x-3 px-0 py-3 text-lg text-red-400 hover:text-red-300">
+                <a href="login.php?action=logout" class="flex items-center space-x-3 px-0 py-3 text-lg text-red-400 hover:text-red-300">
                     <div class="w-5 h-5 flex items-center justify-center"><i class="ri-logout-box-line"></i></div>
                     <span>Logout</span>
                 </a>
@@ -277,7 +276,6 @@
     </div>
 
     <script id="dropdown-mobile-menu-script">
-        // ... (JavaScript sama seperti di halaman sebelumnya)
         document.addEventListener('DOMContentLoaded', function () {
             const notificationsBtn = document.getElementById('notifications-btn');
             const notificationsDropdown = document.getElementById('notifications-dropdown');
@@ -341,6 +339,8 @@
                 let clickedOnAButton = false;
                 if (notificationsBtn && notificationsBtn.contains(e.target)) clickedOnAButton = true;
                 if (adminMenuBtn && adminMenuBtn.contains(e.target)) clickedOnAButton = true;
+                if (mobileMenuButton && mobileMenuButton.contains(e.target)) clickedOnAButton = true;
+
 
                 if (!clickedInsideADropdown && !clickedOnAButton) {
                     hideAllDropdowns();
@@ -350,14 +350,14 @@
             if (mobileMenu) {
                 const mobileLinks = mobileMenu.querySelectorAll('a');
                 mobileLinks.forEach(link => {
-                    link.addEventListener('click', function () {
-                        if (link.getAttribute('href').startsWith('#') && link.getAttribute('href').length > 1 && !link.getAttribute('href').startsWith('#!')) {
-                           // Smooth scroll handled by another script, menu closes there
-                        } else if (!link.getAttribute('href').startsWith('#')) { 
+                    link.addEventListener('click', function (event) {
+                        const href = link.getAttribute('href');
+                        if (href && href.startsWith('#') && href.length > 1 && !href.startsWith('#!')) {
+                        } else if (href && !href.startsWith('#')) { 
                             mobileMenu.classList.add('hidden');
                             mobileMenu.classList.remove('flex');
                         }
-                        if(link.getAttribute('href') === '#profile' || link.getAttribute('href') === '#logout') {
+                        if(href === '#profile' || href === '#logout') {
                              mobileMenu.classList.add('hidden');
                              mobileMenu.classList.remove('flex');
                         }
@@ -367,7 +367,6 @@
         });
     </script>
     <script id="smooth-scroll-script"> 
-        // ... (JavaScript sama seperti di halaman sebelumnya)
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
                 anchor.addEventListener("click", function (e) {

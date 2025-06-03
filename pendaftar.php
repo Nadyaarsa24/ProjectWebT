@@ -1,3 +1,10 @@
+<?php
+// session_start(); // Jika Anda menggunakan session, pastikan ini ada di paling atas
+// if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+//     header('Location: login.php');
+//     exit;
+// }
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -64,7 +71,8 @@
 <body class="bg-primary text-gray-300">
     <header class="bg-primary shadow-md fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            <a href="dashboard.php" class="text-2xl font-['Pacifico'] text-secondary">BANSUSS</a> <div class="flex items-center space-x-3 sm:space-x-4">
+            <a href="dashboard.php" class="text-2xl font-['Pacifico'] text-secondary">BANSUSS</a> 
+            <div class="flex items-center space-x-3 sm:space-x-4">
                 <div class="relative">
                     <button id="notifications-btn"
                         class="w-10 h-10 flex items-center justify-center text-gray-300 hover:text-secondary relative">
@@ -92,37 +100,36 @@
     <div class="flex min-h-screen pt-[68px] sm:pt-[72px]">
         <aside class="w-0 md:w-64 bg-primary border-r border-gray-700 fixed h-full hidden md:block pt-4">
             <nav class="p-4 space-y-1">
-                <a href="dashboard.php" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg"> 
+                <a href="dashboard.php" 
+                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg"> 
                     <div class="w-5 h-5 flex items-center justify-center">
                         <i class="ri-dashboard-line"></i>
                     </div>
                     <span class="font-medium">Dashboard</span>
                 </a>
                 <a href="pendaftar.php"
-                    class="flex items-center space-x-3 px-4 py-3 text-secondary bg-gray-700 rounded-lg"> <div class="w-5 h-5 flex items-center justify-center">
+                    class="flex items-center space-x-3 px-4 py-3 text-secondary bg-gray-700 rounded-lg"> 
+                    <div class="w-5 h-5 flex items-center justify-center">
                         <i class="ri-user-3-line"></i>
                     </div>
                     <span>Pendaftar</span>
                 </a>
-                <a href="matakuliah.php" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
-                    <div class="w-5 h-5 flex items-center justify-center">
-                        <i class="ri-book-2-line"></i>
-                    </div>
-                    <span>Mata Kuliah</span>
-                </a>
-                <a href="jadwal_wawancara.php" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
+                <a href="jadwal_wawancara.php" 
+                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
                     <div class="w-5 h-5 flex items-center justify-center">
                         <i class="ri-calendar-2-line"></i>
                     </div>
                     <span>Jadwal Wawancara</span>
                 </a>
-                <a href="pengumuman_admin.php" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
+                <a href="pengumuman_admin.php" 
+                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
                     <div class="w-5 h-5 flex items-center justify-center">
                         <i class="ri-megaphone-line"></i>
                     </div>
                     <span>Pengumuman</span>
                 </a>
-                <a href="pengaturan_admin.php" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
+                <a href="pengaturan_admin.php" 
+                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
                     <div class="w-5 h-5 flex items-center justify-center">
                         <i class="ri-settings-3-line"></i>
                     </div>
@@ -143,7 +150,7 @@
                     </div>
                 </div>
 
-                <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div class="relative">
                         <input type="text" placeholder="Cari nama pendaftar..."
                             class="w-full pl-10 pr-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-secondary focus:border-secondary placeholder-gray-400">
@@ -151,12 +158,6 @@
                             <i class="ri-search-line"></i>
                         </div>
                     </div>
-                    <select class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-secondary focus:border-secondary">
-                        <option value="">Semua Mata Kuliah</option>
-                        <option value="alp">Algoritma & Pemrograman</option>
-                        <option value="basdat">Basis Data</option>
-                        <option value="web">Pemrograman Web</option>
-                    </select>
                     <select class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-secondary focus:border-secondary">
                         <option value="">Semua Status</option>
                         <option value="review">Dalam Review</option>
@@ -172,15 +173,13 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full min-w-[800px]">
-                        <thead>
+                    <table class="w-full min-w-[700px]"> <thead>
                             <tr class="bg-gray-700/50 text-left">
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-lg">
                                     <input type="checkbox" id="select-all-pendaftar">
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Nama</th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Kontak</th>
-                                <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Mata Kuliah</th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Tgl Daftar</th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tr-lg">Aksi</th>
@@ -188,13 +187,12 @@
                         </thead>
                         <tbody class="divide-y divide-gray-700">
                             <?php 
-                            // Data dummy untuk pendaftar - Ganti dengan data dari database jika perlu
                             $pendaftar_list = [
-                                ["id" => 1, "nama" => "Ahmad Fauzi", "nim" => "201011400001", "email" => "ahmad.f@example.com", "matkul" => "Algoritma & Pemrograman", "tgl_daftar" => "2025-05-28", "status" => "Dalam Review", "foto" => "https://i.pravatar.cc/150?u=ahmadfauzi"],
-                                ["id" => 2, "nama" => "Bunga Citra Lestari", "nim" => "211011400002", "email" => "bunga.c@example.com", "matkul" => "Basis Data", "tgl_daftar" => "2025-05-29", "status" => "Lolos Berkas", "foto" => "https://i.pravatar.cc/150?u=bungacitra"],
-                                ["id" => 3, "nama" => "Charlie Puth", "nim" => "191011400003", "email" => "charlie.p@example.com", "matkul" => "Pemrograman Web", "tgl_daftar" => "2025-05-30", "status" => "Diterima", "foto" => "https://i.pravatar.cc/150?u=charlieputh"],
-                                ["id" => 4, "nama" => "Dewi Sandra", "nim" => "221011400004", "email" => "dewi.s@example.com", "matkul" => "Algoritma & Pemrograman", "tgl_daftar" => "2025-06-01", "status" => "Ditolak", "foto" => "https://i.pravatar.cc/150?u=dewisandra"],
-                                ["id" => 5, "nama" => "Eko Patrio", "nim" => "201011400005", "email" => "eko.p@example.com", "matkul" => "Basis Data", "tgl_daftar" => "2025-06-02", "status" => "Wawancara", "foto" => "https://i.pravatar.cc/150?u=ekopatrio"],
+                                ["id" => 1, "nama" => "Ahmad Fauzi", "nim" => "201011400001", "email" => "ahmad.f@example.com", "tgl_daftar" => "2025-05-28", "status" => "Dalam Review", "foto" => "https://i.pravatar.cc/150?u=ahmadfauzi"],
+                                ["id" => 2, "nama" => "Bunga Citra Lestari", "nim" => "211011400002", "email" => "bunga.c@example.com", "tgl_daftar" => "2025-05-29", "status" => "Lolos Berkas", "foto" => "https://i.pravatar.cc/150?u=bungacitra"],
+                                ["id" => 3, "nama" => "Charlie Puth", "nim" => "191011400003", "email" => "charlie.p@example.com", "tgl_daftar" => "2025-05-30", "status" => "Diterima", "foto" => "https://i.pravatar.cc/150?u=charlieputh"],
+                                ["id" => 4, "nama" => "Dewi Sandra", "nim" => "221011400004", "email" => "dewi.s@example.com", "tgl_daftar" => "2025-06-01", "status" => "Ditolak", "foto" => "https://i.pravatar.cc/150?u=dewisandra"],
+                                ["id" => 5, "nama" => "Eko Patrio", "nim" => "201011400005", "email" => "eko.p@example.com", "tgl_daftar" => "2025-06-02", "status" => "Wawancara", "foto" => "https://i.pravatar.cc/150?u=ekopatrio"],
                             ];
 
                             foreach ($pendaftar_list as $pendaftar): 
@@ -211,23 +209,20 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
-                                        <img class="h-10 w-10 rounded-full object-cover mr-3 shrink-0" src="<?= $pendaftar['foto'] ?>" alt="<?= $pendaftar['nama'] ?>">
+                                        <img class="h-10 w-10 rounded-full object-cover mr-3 shrink-0" src="<?= $pendaftar['foto'] ?>" alt="<?= htmlspecialchars($pendaftar['nama']) ?>">
                                         <div>
-                                            <div class="text-sm font-medium text-gray-100"><?= $pendaftar['nama'] ?></div>
-                                            <div class="text-xs text-gray-400">NIM: <?= $pendaftar['nim'] ?></div>
+                                            <div class="text-sm font-medium text-gray-100"><?= htmlspecialchars($pendaftar['nama']) ?></div>
+                                            <div class="text-xs text-gray-400">NIM: <?= htmlspecialchars($pendaftar['nim']) ?></div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
-                                     <div class="text-sm text-gray-200"><?= $pendaftar['email'] ?></div>
-                                     </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-200"><?= $pendaftar['matkul'] ?></div>
+                                     <div class="text-sm text-gray-200"><?= htmlspecialchars($pendaftar['email']) ?></div>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-400"><?= date('d M Y', strtotime($pendaftar['tgl_daftar'])) ?></td>
                                 <td class="px-6 py-4">
                                     <span class="px-3 py-1 text-xs font-semibold rounded-full <?= $status_color ?>">
-                                        <?= $pendaftar['status'] ?>
+                                        <?= htmlspecialchars($pendaftar['status']) ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
@@ -263,18 +258,32 @@
         </main>
     </div>
 
-    <div id="notifications-dropdown" class="hidden absolute right-4 top-16 mt-1 w-80 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-[70]"> ... (Isi sama seperti sebelumnya) ... </div>
-    <div id="admin-menu-dropdown" class="hidden absolute right-4 top-16 mt-1 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-[70]"> ... (Isi sama seperti sebelumnya) ... </div>
+    <div id="notifications-dropdown" class="hidden absolute right-4 top-16 mt-1 w-80 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-[70]">
+        <div class="p-4 border-b border-gray-700"><h3 class="font-semibold text-gray-100">Notifikasi</h3></div>
+        <div class="max-h-96 overflow-y-auto">
+            <div class="p-4 border-b border-gray-700 hover:bg-gray-700"><div class="flex items-start space-x-3"><div class="w-8 h-8 bg-blue-500/30 rounded-full flex items-center justify-center text-blue-300 shrink-0"><i class="ri-user-add-line"></i></div><div><p class="text-sm text-gray-200">Pendaftar baru</p><p class="text-xs text-gray-400">2 min lalu</p></div></div></div>
+            <div class="p-4 border-b border-gray-700 hover:bg-gray-700"><div class="flex items-start space-x-3"><div class="w-8 h-8 bg-green-500/30 rounded-full flex items-center justify-center text-green-300 shrink-0"><i class="ri-check-line"></i></div><div><p class="text-sm text-gray-200">Wawancara selesai</p><p class="text-xs text-gray-400">1 jam lalu</p></div></div></div>
+        </div>
+        <div class="p-4 border-t border-gray-700"><a href="#" class="text-secondary hover:text-yellow-500 text-sm font-medium w-full block text-center">Lihat Semua</a></div>
+    </div>
+    <div id="admin-menu-dropdown" class="hidden absolute right-4 top-16 mt-1 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-[70]">
+        <div class="py-1">
+            <a href="#profile" class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-secondary"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-user-line"></i></div><span>Profile</span></a>
+            <a href="pengaturan_admin.php" class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-secondary"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-settings-3-line"></i></div><span>Settings</span></a>
+            <hr class="my-1 border-gray-700">
+            <a href="login.php?action=logout" class="flex items-center space-x-3 px-4 py-2 text-sm text-red-400 hover:bg-gray-700 hover:text-red-300"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-logout-box-line"></i></div><span>Logout</span></a>
+        </div>
+    </div>
     <div id="mobile-menu" class="fixed inset-0 bg-primary z-[60] hidden flex-col pt-0 md:hidden">
         <div class="flex justify-between items-center p-4 border-b border-gray-700">
-            <a href="dashboard.php" class="text-xl font-['Pacifico'] text-secondary">logo</a>
+            <a href="dashboard.php" class="text-xl font-['Pacifico'] text-secondary">BANSUSS</a>
             <button id="close-mobile-menu-button" title="Tutup Menu" aria-label="Tutup Menu" class="p-2 text-gray-200 hover:text-secondary focus:outline-none">
                 <i class="ri-close-line ri-xl"></i>
             </button>
         </div>
-        <div class="container mx-auto px-4 py-4">
+        <div class="container mx-auto px-4 py-4 flex-1 overflow-y-auto">
             <a href="dashboard.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Dashboard</a>
-            <a href="pendaftar.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-secondary bg-gray-700/50 rounded">Pendaftar</a> <a href="matakuliah.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Mata Kuliah</a>
+            <a href="pendaftar.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-secondary bg-gray-700/50 rounded">Pendaftar</a> 
             <a href="jadwal_wawancara.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Jadwal Wawancara</a>
             <a href="pengumuman_admin.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Pengumuman</a>
             <a href="pengaturan_admin.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Pengaturan</a>
@@ -283,7 +292,7 @@
                     <div class="w-5 h-5 flex items-center justify-center"><i class="ri-user-line"></i></div>
                     <span>Profile</span>
                 </a>
-                <a href="#logout" class="flex items-center space-x-3 px-0 py-3 text-lg text-red-400 hover:text-red-300">
+                <a href="login.php?action=logout" class="flex items-center space-x-3 px-0 py-3 text-lg text-red-400 hover:text-red-300">
                     <div class="w-5 h-5 flex items-center justify-center"><i class="ri-logout-box-line"></i></div>
                     <span>Logout</span>
                 </a>
@@ -355,6 +364,8 @@
                 let clickedOnAButton = false;
                 if (notificationsBtn && notificationsBtn.contains(e.target)) clickedOnAButton = true;
                 if (adminMenuBtn && adminMenuBtn.contains(e.target)) clickedOnAButton = true;
+                if (mobileMenuButton && mobileMenuButton.contains(e.target)) clickedOnAButton = true;
+
 
                 if (!clickedInsideADropdown && !clickedOnAButton) {
                     hideAllDropdowns();
@@ -364,18 +375,14 @@
             if (mobileMenu) {
                 const mobileLinks = mobileMenu.querySelectorAll('a');
                 mobileLinks.forEach(link => {
-                    link.addEventListener('click', function () {
-                        // Cek apakah link internal ke section di halaman yang sama atau link ke halaman lain
-                        if (link.getAttribute('href').startsWith('#') && link.getAttribute('href').length > 1 && !link.getAttribute('href').startsWith('#!')) {
-                            // Biarkan smooth scroll menangani jika ini adalah link section
-                            // mobileMenu.classList.add('hidden'); // Tutup menu setelah klik untuk smooth scroll
-                            // mobileMenu.classList.remove('flex');
-                        } else if (!link.getAttribute('href').startsWith('#')) { // Jika link ke halaman lain
+                    link.addEventListener('click', function (event) {
+                        const href = link.getAttribute('href');
+                        if (href && href.startsWith('#') && href.length > 1 && !href.startsWith('#!')) {
+                        } else if (href && !href.startsWith('#')) { 
                             mobileMenu.classList.add('hidden');
                             mobileMenu.classList.remove('flex');
                         }
-                        // Untuk link seperti #profile, #logout di mobile menu, mereka juga akan menutup menu
-                        if(link.getAttribute('href') === '#profile' || link.getAttribute('href') === '#logout') {
+                        if(href === '#profile' || href === '#logout') {
                              mobileMenu.classList.add('hidden');
                              mobileMenu.classList.remove('flex');
                         }
@@ -383,7 +390,6 @@
                 });
             }
 
-            // Select All Checkbox
             const selectAllCheckbox = document.getElementById('select-all-pendaftar');
             const pendaftarCheckboxes = document.querySelectorAll('input[name="pendaftar_ids[]"]');
             if(selectAllCheckbox && pendaftarCheckboxes.length > 0) {
@@ -395,7 +401,7 @@
             }
         });
     </script>
-    <script id="smooth-scroll-script"> // Script smooth scroll jika ada link #
+    <script id="smooth-scroll-script"> 
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
                 anchor.addEventListener("click", function (e) {
@@ -405,9 +411,7 @@
                     if (this.closest('#notifications-dropdown') || this.closest('#admin-menu-dropdown')) {
                         return; 
                     }
-
                     e.preventDefault(); 
-
                     let targetElement;
                     try {
                         targetElement = document.querySelector(targetId);
@@ -425,7 +429,6 @@
                             top: targetPosition,
                             behavior: "smooth",
                         });
-                         // Tutup menu mobile jika terbuka dan link adalah untuk smooth scroll
                         const mobileMenu = document.getElementById('mobile-menu');
                         if(mobileMenu && mobileMenu.classList.contains('flex')){
                             mobileMenu.classList.add('hidden');
