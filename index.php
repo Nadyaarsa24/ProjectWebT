@@ -25,6 +25,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Poppins sebagai font sans-serif default
+                    },
                     colors: {
                         'dark-bg': '#111827',      // Contoh: gray-900
                         'dark-card': '#1F2937',    // Contoh: gray-800

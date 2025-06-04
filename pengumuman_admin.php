@@ -17,6 +17,9 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Poppins sebagai font sans-serif default
+                    },
                     colors: { primary: "#000000", secondary: "#ffcc00" }, // Primer: Hitam, Sekunder: Kuning
                     borderRadius: {
                         none: "0px",
@@ -36,12 +39,11 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif; /* Menggunakan Poppins sebagai font utama */
         }
         ::-webkit-scrollbar {
             width: 8px;
@@ -151,13 +153,13 @@
                 <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
                     <div class="relative">
                         <input type="text" placeholder="Cari judul pengumuman..."
-                            class="w-full pl-10 pr-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-secondary focus:border-secondary placeholder-gray-400">
+                            class="w-full pl-10 pr-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary placeholder-gray-400">
                         <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                             <i class="ri-search-line"></i>
                         </div>
                     </div>
                     <div>
-                        <select id="filter-status-pengumuman" name="filter-status-pengumuman" class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-secondary focus:border-secondary">
+                        <select id="filter-status-pengumuman" name="filter-status-pengumuman" class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary">
                             <option value="">Semua Status</option>
                             <option value="dipublikasikan">Dipublikasikan</option>
                             <option value="draft">Draft</option>
@@ -190,7 +192,7 @@
                             $status_icon = 'ri-edit-box-line';
                         }
                     ?>
-                    <div class="bg-gray-700/60 p-5 rounded-xl shadow-lg flex flex-col justify-between hover:shadow-secondary/20 transition-shadow duration-300">
+                    <div class="bg-gray-700/60 p-5 rounded-xl shadow-lg flex flex-col justify-between hover:shadow-lg hover:shadow-secondary/20 transition-all duration-300 transform hover:-translate-y-1">
                         <div>
                             <div class="flex justify-between items-start mb-2">
                                 <h2 class="text-lg font-semibold text-gray-100 hover:text-secondary transition-colors cursor-pointer"><?= htmlspecialchars($pengumuman['judul']) ?></h2>

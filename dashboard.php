@@ -17,6 +17,10 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Poppins sebagai font sans-serif default
+                    },
+
                     colors: { primary: "#000000", secondary: "#ffcc00" }, // Primer: Hitam, Sekunder: Kuning
                     borderRadius: {
                         none: "0px",

@@ -17,7 +17,10 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { primary: "#000000", secondary: "#ffcc00" }, // Primer: Hitam, Sekunder: Kuning
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], 
+                    },
+                    colors: { primary: "#000000", secondary: "#ffcc00" }, 
                     borderRadius: {
                         none: "0px",
                         sm: "4px",
@@ -36,12 +39,11 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif; 
         }
         ::-webkit-scrollbar {
             width: 8px;
@@ -64,7 +66,7 @@
         input[type="file"] {
             @apply text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-600 file:text-gray-200 hover:file:bg-gray-500;
         }
-         input[type="checkbox"] { /* Tambahkan style checkbox jika belum ada */
+         input[type="checkbox"] { 
             @apply appearance-none w-5 h-5 border-2 border-gray-500 rounded cursor-pointer relative checked:bg-secondary checked:border-secondary;
         }
         input[type="checkbox"]:checked::after {
@@ -157,11 +159,6 @@
                                 <input type="text" name="admin-name" id="admin-name" value="Admin Utama"
                                     class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary placeholder-gray-400">
                             </div>
-                            <div>
-                                <label for="admin-email" class="block text-sm font-medium text-gray-300 mb-1.5">Alamat Email</label>
-                                <input type="email" name="admin-email" id="admin-email" value="admin@example.com"
-                                    class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary placeholder-gray-400">
-                            </div>
                              <div>
                                 <label for="admin-avatar" class="block text-sm font-medium text-gray-300 mb-1.5">Foto Profil</label>
                                 <div class="flex items-center space-x-4">
@@ -207,11 +204,6 @@
                                     <input type="text" name="app-name" id="app-name" value="Open Recruitment Asdos"
                                         class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary placeholder-gray-400">
                                 </div>
-                                <div>
-                                    <label for="notification-email" class="block text-sm font-medium text-gray-300 mb-1.5">Email Notifikasi Default</label>
-                                    <input type="email" name="notification-email" id="notification-email" value="noreply@example.ac.id"
-                                        class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary placeholder-gray-400">
-                                </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label for="recruitment-start" class="block text-sm font-medium text-gray-300 mb-1.5">Pendaftaran Dibuka</label>
@@ -223,17 +215,6 @@
                                         <input type="date" name="recruitment-end" id="recruitment-end" value="2025-06-15"
                                             class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary">
                                     </div>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-300 mb-2">Mode Maintenance</label>
-                                    <label for="maintenance-mode" class="flex items-center cursor-pointer">
-                                        <div class="relative">
-                                            <input type="checkbox" id="maintenance-mode" class="sr-only peer">
-                                            <div class="block bg-gray-600 w-10 h-6 rounded-full peer-checked:bg-yellow-600 transition"></div>
-                                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition peer-checked:translate-x-full peer-checked:bg-secondary"></div>
-                                        </div>
-                                        <div class="ml-3 text-gray-300 text-sm">Aktifkan Mode Maintenance</div>
-                                    </label>
                                 </div>
                                 <div class="flex justify-end pt-4">
                                     <button type="submit" class="bg-secondary text-primary px-6 py-2.5 rounded-button hover:bg-yellow-500 font-semibold flex items-center space-x-2">
