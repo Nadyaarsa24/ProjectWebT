@@ -1,185 +1,75 @@
 <?php
-// session_start(); // Jika Anda menggunakan session, pastikan ini ada di paling atas
+session_start(); // Mulai session jika belum dimulai
+
+// // Cek autentikasi (aktifkan jika sudah ada sistem login yang berfungsi)
 // if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 //     header('Location: login.php');
 //     exit;
 // }
-?>
-<!DOCTYPE html>
-<html lang="id">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Pendaftar - Admin Dashboard</title>
-    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'], // Poppins sebagai font sans-serif default
-                    },
-                    colors: { primary: "#000000", secondary: "#ffcc00" }, // Primer: Hitam, Sekunder: Kuning
-                    borderRadius: {
-                        none: "0px",
-                        sm: "4px",
-                        DEFAULT: "8px",
-                        md: "12px",
-                        lg: "16px",
-                        xl: "20px",
-                        "2xl": "24px",
-                        "3xl": "32px",
-                        full: "9999px",
-                        button: "8px",
-                    },
-                },
-            },
-        };
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        input[type="checkbox"] {
-            @apply appearance-none w-5 h-5 border-2 border-gray-500 rounded cursor-pointer relative checked:bg-secondary checked:border-secondary;
-        }
-        input[type="checkbox"]:checked::after {
-            content: '';
-            @apply absolute w-[5px] h-[10px] border-primary border-r-2 border-b-2 top-[2px] left-[6px] rotate-45;
-        }
-        /* Custom scrollbar for dark theme */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1f2937; /* bg-gray-800 */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4b5563; /* bg-gray-600 */
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6b7280; /* bg-gray-500 */
-        }
-    </style>
-</head>
+// Definisikan variabel khusus untuk halaman ini
+$pageTitle = "Data Pendaftar";
+$currentPage = "pendaftar"; // Untuk menandai menu aktif
+
+// 1. Include Komponen Head HTML
+require __DIR__ . '/components/html_head.php'; 
+?>
 
 <body class="bg-primary text-gray-300">
-    <header class="bg-primary shadow-md fixed top-0 left-0 right-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            <a href="dashboard.php" class="text-2xl font-['Pacifico'] text-secondary">BANSUSS</a> 
-            <div class="flex items-center space-x-3 sm:space-x-4">
-                <div class="relative">
-                    <button id="notifications-btn"
-                        class="w-10 h-10 flex items-center justify-center text-gray-300 hover:text-secondary relative">
-                        <i class="ri-notification-3-line ri-lg"></i>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                    </button>
-                </div>
-                <div class="relative hidden md:flex">
-                    <button id="admin-menu-btn" class="flex items-center space-x-2 text-gray-100 hover:text-secondary">
-                        <div class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
-                             <i class="ri-user-line text-secondary"></i> </div>
-                        <span class="font-medium">Admin</span>
-                        <i class="ri-arrow-down-s-line"></i>
-                    </button>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" title="Buka Menu" aria-label="Buka Menu" class="p-2 text-gray-200 hover:text-secondary focus:outline-none">
-                        <i class="ri-menu-line ri-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
+    
+    <?php 
+    // 2. Include Komponen Header Admin
+    require __DIR__ . '/components/admin_header.php'; 
+    ?>
 
-    <div class="flex min-h-screen pt-[68px] sm:pt-[72px]">
-        <aside class="w-0 md:w-64 bg-primary border-r border-gray-700 fixed h-full hidden md:block pt-4">
-            <nav class="p-4 space-y-1">
-                <a href="dashboard.php" 
-                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg"> 
-                    <div class="w-5 h-5 flex items-center justify-center">
-                        <i class="ri-dashboard-line"></i>
-                    </div>
-                    <span class="font-medium">Dashboard</span>
-                </a>
-                <a href="pendaftar.php"
-                    class="flex items-center space-x-3 px-4 py-3 text-secondary bg-gray-700 rounded-lg"> 
-                    <div class="w-5 h-5 flex items-center justify-center">
-                        <i class="ri-user-3-line"></i>
-                    </div>
-                    <span>Pendaftar</span>
-                </a>
-                <a href="jadwal_wawancara.php" 
-                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
-                    <div class="w-5 h-5 flex items-center justify-center">
-                        <i class="ri-calendar-2-line"></i>
-                    </div>
-                    <span>Jadwal Wawancara</span>
-                </a>
-                <a href="pengumuman_admin.php" 
-                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
-                    <div class="w-5 h-5 flex items-center justify-center">
-                        <i class="ri-megaphone-line"></i>
-                    </div>
-                    <span>Pengumuman</span>
-                </a>
-                <a href="pengaturan_admin.php" 
-                    class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-secondary rounded-lg">
-                    <div class="w-5 h-5 flex items-center justify-center">
-                        <i class="ri-settings-3-line"></i>
-                    </div>
-                    <span>Pengaturan</span>
-                </a>
-            </nav>
-        </aside>
+    <div class="flex min-h-screen pt-[68px] sm:pt-[72px]"> 
+        
+        <?php 
+        // 3. Include Komponen Sidebar Admin
+        require __DIR__ . '/components/admin_sidebar.php'; 
+        ?>
 
         <main class="flex-1 p-6 sm:p-8 bg-gray-900 md:ml-64">
-            <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg min-h-full">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-                    <h1 class="text-2xl font-semibold text-gray-100 mb-4 sm:mb-0">Data Pendaftar Asisten Dosen</h1>
+                    <h1 class="text-2xl sm:text-3xl font-semibold text-gray-100 mb-4 sm:mb-0">Data Pendaftar</h1>
                     <div class="flex space-x-3">
                         <button class="bg-secondary text-primary px-4 py-2 rounded-button hover:bg-yellow-500 font-medium flex items-center space-x-2">
-                            <i class="ri-add-line"></i>
+                            <i class="ri-user-add-line"></i>
                             <span>Tambah Pendaftar</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
                     <div class="relative">
-                        <input type="text" placeholder="Cari nama pendaftar..."
-                            class="w-full pl-10 pr-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-secondary focus:border-secondary placeholder-gray-400">
+                        <input type="text" placeholder="Cari nama atau NIM..."
+                            class="w-full pl-10 pr-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary placeholder-gray-400">
                         <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                             <i class="ri-search-line"></i>
                         </div>
                     </div>
-                    <select class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-secondary focus:border-secondary">
-                        <option value="">Semua Status</option>
-                        <option value="review">Dalam Review</option>
-                        <option value="lolos_berkas">Lolos Berkas</option>
-                        <option value="wawancara">Wawancara</option>
-                        <option value="diterima">Diterima</option>
-                        <option value="ditolak">Ditolak</option>
-                    </select>
-                    <button class="bg-gray-600 hover:bg-gray-500 text-gray-200 px-4 py-2.5 rounded-lg font-medium flex items-center justify-center space-x-2">
+                    <div>
+                        <select id="filter-status-pendaftar" name="filter-status-pendaftar" class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary">
+                            <option value="">Semua Status Pendaftaran</option>
+                            <option value="review">Dalam Review</option>
+                            <option value="lolos_berkas">Lolos Berkas</option>
+                            <option value="wawancara">Wawancara</option>
+                            <option value="diterima">Diterima</option>
+                            <option value="ditolak">Ditolak</option>
+                        </select>
+                    </div>
+                     <button class="bg-gray-600 hover:bg-gray-500 text-gray-200 px-4 py-2.5 rounded-lg font-medium flex items-center justify-center space-x-2 h-[46px] sm:h-auto sm:self-end">
                         <i class="ri-filter-3-line"></i>
-                        <span>Filter</span>
+                        <span>Filter Pendaftar</span>
                     </button>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="w-full min-w-[700px]"> <thead>
                             <tr class="bg-gray-700/50 text-left">
-                                <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-lg">
-                                    <input type="checkbox" id="select-all-pendaftar">
+                                <th class="px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-lg w-12">
+                                    <input type="checkbox" id="select-all-pendaftar" class="cursor-pointer">
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Nama</th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Kontak</th>
@@ -198,45 +88,56 @@
                                 ["id" => 5, "nama" => "Eko Patrio", "nim" => "201011400005", "email" => "eko.p@example.com", "tgl_daftar" => "2025-06-02", "status" => "Wawancara", "foto" => "https://i.pravatar.cc/150?u=ekopatrio"],
                             ];
 
-                            foreach ($pendaftar_list as $pendaftar): 
-                                $status_color = 'text-gray-400 bg-gray-600/30'; // Default
-                                if ($pendaftar['status'] == 'Dalam Review') $status_color = 'text-secondary bg-secondary/20';
-                                if ($pendaftar['status'] == 'Lolos Berkas') $status_color = 'text-blue-400 bg-blue-500/20';
-                                if ($pendaftar['status'] == 'Wawancara') $status_color = 'text-purple-400 bg-purple-500/20';
-                                if ($pendaftar['status'] == 'Diterima') $status_color = 'text-green-400 bg-green-500/20';
-                                if ($pendaftar['status'] == 'Ditolak') $status_color = 'text-red-400 bg-red-500/20';
-                            ?>
-                            <tr class="hover:bg-gray-700/50">
-                                <td class="px-6 py-4">
-                                    <input type="checkbox" name="pendaftar_ids[]" value="<?= $pendaftar['id'] ?>">
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <img class="h-10 w-10 rounded-full object-cover mr-3 shrink-0" src="<?= $pendaftar['foto'] ?>" alt="<?= htmlspecialchars($pendaftar['nama']) ?>">
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-100"><?= htmlspecialchars($pendaftar['nama']) ?></div>
-                                            <div class="text-xs text-gray-400">NIM: <?= htmlspecialchars($pendaftar['nim']) ?></div>
+                            if (empty($pendaftar_list)): ?>
+                                <tr>
+                                    <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                                        <div class="flex flex-col items-center">
+                                            <i class="ri-user-search-line text-4xl mb-2"></i>
+                                            <span>Tidak ada data pendaftar yang ditemukan.</span>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                     <div class="text-sm text-gray-200"><?= htmlspecialchars($pendaftar['email']) ?></div>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-400"><?= date('d M Y', strtotime($pendaftar['tgl_daftar'])) ?></td>
-                                <td class="px-6 py-4">
-                                    <span class="px-3 py-1 text-xs font-semibold rounded-full <?= $status_color ?>">
-                                        <?= htmlspecialchars($pendaftar['status']) ?>
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center space-x-2">
-                                        <button title="Lihat Detail" class="text-secondary hover:text-yellow-500 p-1"><i class="ri-eye-line ri-lg"></i></button>
-                                        <button title="Edit Pendaftar" class="text-blue-400 hover:text-blue-300 p-1"><i class="ri-pencil-line ri-lg"></i></button>
-                                        <button title="Hapus Pendaftar" class="text-red-400 hover:text-red-300 p-1"><i class="ri-delete-bin-line ri-lg"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
+                                    </td>
+                                </tr>
+                            <?php else:
+                                foreach ($pendaftar_list as $pendaftar): 
+                                    $status_color = 'text-gray-400 bg-gray-600/30'; 
+                                    if ($pendaftar['status'] == 'Dalam Review') $status_color = 'text-secondary bg-secondary/20';
+                                    if ($pendaftar['status'] == 'Lolos Berkas') $status_color = 'text-blue-400 bg-blue-500/20';
+                                    if ($pendaftar['status'] == 'Wawancara') $status_color = 'text-purple-400 bg-purple-500/20';
+                                    if ($pendaftar['status'] == 'Diterima') $status_color = 'text-green-400 bg-green-500/20';
+                                    if ($pendaftar['status'] == 'Ditolak') $status_color = 'text-red-400 bg-red-500/20';
+                                ?>
+                                <tr class="hover:bg-gray-700/50 transition-colors duration-150">
+                                    <td class="px-4 py-4">
+                                        <input type="checkbox" name="pendaftar_ids[]" value="<?= $pendaftar['id'] ?>" class="cursor-pointer">
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center">
+                                            <img class="h-10 w-10 rounded-full object-cover mr-3 shrink-0" src="<?= htmlspecialchars($pendaftar['foto']) ?>" alt="<?= htmlspecialchars($pendaftar['nama']) ?>">
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-100"><?= htmlspecialchars($pendaftar['nama']) ?></div>
+                                                <div class="text-xs text-gray-400">NIM: <?= htmlspecialchars($pendaftar['nim']) ?></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                         <div class="text-sm text-gray-200"><?= htmlspecialchars($pendaftar['email']) ?></div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-400"><?= date('d M Y', strtotime($pendaftar['tgl_daftar'])) ?></td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-3 py-1 text-xs font-semibold rounded-full <?= $status_color ?>">
+                                            <?= htmlspecialchars($pendaftar['status']) ?>
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center space-x-1">
+                                            <button title="Lihat Detail" class="text-gray-400 hover:text-secondary p-1.5 rounded-md hover:bg-gray-600/50 transition-colors"><i class="ri-eye-line ri-lg"></i></button>
+                                            <button title="Edit Pendaftar" class="text-gray-400 hover:text-blue-400 p-1.5 rounded-md hover:bg-gray-600/50 transition-colors"><i class="ri-pencil-line ri-lg"></i></button>
+                                            <button title="Hapus Pendaftar" class="text-gray-400 hover:text-red-400 p-1.5 rounded-md hover:bg-gray-600/50 transition-colors"><i class="ri-delete-bin-line ri-lg"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endforeach; 
+                            endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -259,188 +160,13 @@
                 </div>
             </div>
         </main>
-    </div>
+    </div> 
 
-    <div id="notifications-dropdown" class="hidden absolute right-4 top-16 mt-1 w-80 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-[70]">
-        <div class="p-4 border-b border-gray-700"><h3 class="font-semibold text-gray-100">Notifikasi</h3></div>
-        <div class="max-h-96 overflow-y-auto">
-            <div class="p-4 border-b border-gray-700 hover:bg-gray-700"><div class="flex items-start space-x-3"><div class="w-8 h-8 bg-blue-500/30 rounded-full flex items-center justify-center text-blue-300 shrink-0"><i class="ri-user-add-line"></i></div><div><p class="text-sm text-gray-200">Pendaftar baru</p><p class="text-xs text-gray-400">2 min lalu</p></div></div></div>
-            <div class="p-4 border-b border-gray-700 hover:bg-gray-700"><div class="flex items-start space-x-3"><div class="w-8 h-8 bg-green-500/30 rounded-full flex items-center justify-center text-green-300 shrink-0"><i class="ri-check-line"></i></div><div><p class="text-sm text-gray-200">Wawancara selesai</p><p class="text-xs text-gray-400">1 jam lalu</p></div></div></div>
-        </div>
-        <div class="p-4 border-t border-gray-700"><a href="#" class="text-secondary hover:text-yellow-500 text-sm font-medium w-full block text-center">Lihat Semua</a></div>
-    </div>
-    <div id="admin-menu-dropdown" class="hidden absolute right-4 top-16 mt-1 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 z-[70]">
-        <div class="py-1">
-            <a href="#profile" class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-secondary"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-user-line"></i></div><span>Profile</span></a>
-            <a href="pengaturan_admin.php" class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-secondary"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-settings-3-line"></i></div><span>Settings</span></a>
-            <hr class="my-1 border-gray-700">
-            <a href="login.php?action=logout" class="flex items-center space-x-3 px-4 py-2 text-sm text-red-400 hover:bg-gray-700 hover:text-red-300"><div class="w-4 h-4 flex items-center justify-center"><i class="ri-logout-box-line"></i></div><span>Logout</span></a>
-        </div>
-    </div>
-    <div id="mobile-menu" class="fixed inset-0 bg-primary z-[60] hidden flex-col pt-0 md:hidden">
-        <div class="flex justify-between items-center p-4 border-b border-gray-700">
-            <a href="dashboard.php" class="text-xl font-['Pacifico'] text-secondary">BANSUSS</a>
-            <button id="close-mobile-menu-button" title="Tutup Menu" aria-label="Tutup Menu" class="p-2 text-gray-200 hover:text-secondary focus:outline-none">
-                <i class="ri-close-line ri-xl"></i>
-            </button>
-        </div>
-        <div class="container mx-auto px-4 py-4 flex-1 overflow-y-auto">
-            <a href="dashboard.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Dashboard</a>
-            <a href="pendaftar.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-secondary bg-gray-700/50 rounded">Pendaftar</a> 
-            <a href="jadwal_wawancara.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Jadwal Wawancara</a>
-            <a href="pengumuman_admin.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Pengumuman</a>
-            <a href="pengaturan_admin.php" class="block py-3 text-lg font-medium border-b border-gray-700 text-gray-200 hover:text-secondary">Pengaturan</a>
-            <div class="mt-4 border-t border-gray-700 pt-4">
-                 <a href="#profile" class="flex items-center space-x-3 px-0 py-3 text-lg text-gray-200 hover:text-secondary">
-                    <div class="w-5 h-5 flex items-center justify-center"><i class="ri-user-line"></i></div>
-                    <span>Profile</span>
-                </a>
-                <a href="login.php?action=logout" class="flex items-center space-x-3 px-0 py-3 text-lg text-red-400 hover:text-red-300">
-                    <div class="w-5 h-5 flex items-center justify-center"><i class="ri-logout-box-line"></i></div>
-                    <span>Logout</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <script id="dropdown-mobile-menu-script">
-        document.addEventListener('DOMContentLoaded', function () {
-            const notificationsBtn = document.getElementById('notifications-btn');
-            const notificationsDropdown = document.getElementById('notifications-dropdown');
-            const adminMenuBtn = document.getElementById('admin-menu-btn');
-            const adminMenuDropdown = document.getElementById('admin-menu-dropdown');
-            
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
-
-            function toggleDropdown(button, dropdown) {
-                if (!dropdown) return;
-                const isVisible = !dropdown.classList.contains('hidden');
-                if (dropdown !== notificationsDropdown && notificationsDropdown) notificationsDropdown.classList.add('hidden');
-                if (dropdown !== adminMenuDropdown && adminMenuDropdown) adminMenuDropdown.classList.add('hidden');
-                
-                if (isVisible) {
-                    dropdown.classList.add('hidden');
-                } else {
-                    dropdown.classList.remove('hidden');
-                }
-            }
-
-            function hideAllDropdowns() {
-                if (notificationsDropdown) notificationsDropdown.classList.add('hidden');
-                if (adminMenuDropdown) adminMenuDropdown.classList.add('hidden');
-            }
-
-            if (notificationsBtn) {
-                notificationsBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    toggleDropdown(notificationsBtn, notificationsDropdown);
-                });
-            }
-
-            if (adminMenuBtn) {
-                adminMenuBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    toggleDropdown(adminMenuBtn, adminMenuDropdown);
-                });
-            }
-
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', function() {
-                    mobileMenu.classList.remove('hidden');
-                    mobileMenu.classList.add('flex');
-                });
-            }
-            if (closeMobileMenuButton && mobileMenu) {
-                 closeMobileMenuButton.addEventListener('click', function() {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
-                });
-            }
-
-            document.addEventListener('click', (e) => {
-                let clickedInsideADropdown = false;
-                if (notificationsDropdown && notificationsDropdown.contains(e.target)) clickedInsideADropdown = true;
-                if (adminMenuDropdown && adminMenuDropdown.contains(e.target)) clickedInsideADropdown = true;
-                
-                let clickedOnAButton = false;
-                if (notificationsBtn && notificationsBtn.contains(e.target)) clickedOnAButton = true;
-                if (adminMenuBtn && adminMenuBtn.contains(e.target)) clickedOnAButton = true;
-                if (mobileMenuButton && mobileMenuButton.contains(e.target)) clickedOnAButton = true;
-
-
-                if (!clickedInsideADropdown && !clickedOnAButton) {
-                    hideAllDropdowns();
-                }
-            });
-
-            if (mobileMenu) {
-                const mobileLinks = mobileMenu.querySelectorAll('a');
-                mobileLinks.forEach(link => {
-                    link.addEventListener('click', function (event) {
-                        const href = link.getAttribute('href');
-                        if (href && href.startsWith('#') && href.length > 1 && !href.startsWith('#!')) {
-                        } else if (href && !href.startsWith('#')) { 
-                            mobileMenu.classList.add('hidden');
-                            mobileMenu.classList.remove('flex');
-                        }
-                        if(href === '#profile' || href === '#logout') {
-                             mobileMenu.classList.add('hidden');
-                             mobileMenu.classList.remove('flex');
-                        }
-                    });
-                });
-            }
-
-            const selectAllCheckbox = document.getElementById('select-all-pendaftar');
-            const pendaftarCheckboxes = document.querySelectorAll('input[name="pendaftar_ids[]"]');
-            if(selectAllCheckbox && pendaftarCheckboxes.length > 0) {
-                selectAllCheckbox.addEventListener('change', function() {
-                    pendaftarCheckboxes.forEach(checkbox => {
-                        checkbox.checked = this.checked;
-                    });
-                });
-            }
-        });
-    </script>
-    <script id="smooth-scroll-script"> 
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-                anchor.addEventListener("click", function (e) {
-                    const targetId = this.getAttribute("href");
-                    if (targetId === "#" || targetId.startsWith("#!") || targetId === "#profile" || targetId === "#settings" || targetId === "#logout" ) return; 
-                    
-                    if (this.closest('#notifications-dropdown') || this.closest('#admin-menu-dropdown')) {
-                        return; 
-                    }
-                    e.preventDefault(); 
-                    let targetElement;
-                    try {
-                        targetElement = document.querySelector(targetId);
-                    } catch (error) {
-                        console.warn("Smooth scroll target not found or invalid selector:", targetId);
-                        return;
-                    }
-
-                    if (targetElement) {
-                        const adminHeader = document.querySelector("header.fixed");
-                        const headerHeight = adminHeader ? adminHeader.offsetHeight : 0;
-                        const targetPosition = targetElement.offsetTop - headerHeight - 20; 
-
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: "smooth",
-                        });
-                        const mobileMenu = document.getElementById('mobile-menu');
-                        if(mobileMenu && mobileMenu.classList.contains('flex')){
-                            mobileMenu.classList.add('hidden');
-                            mobileMenu.classList.remove('flex');
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+    <?php 
+    require __DIR__ . '/components/notifications_dropdown.php'; 
+    require __DIR__ . '/components/admin_menu_dropdown.php'; 
+    require __DIR__ . '/components/mobile_menu.php'; 
+    require __DIR__ . '/components/footer_scripts.php'; 
+    ?>
 </body>
 </html>
