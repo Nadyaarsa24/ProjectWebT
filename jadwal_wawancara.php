@@ -51,10 +51,8 @@ require __DIR__ . '/components/html_head.php';
                         <label for="filter-status-wawancara" class="block text-sm font-medium text-gray-400 mb-1.5">Status Wawancara</label>
                         <select id="filter-status-wawancara" name="filter-status-wawancara" class="w-full px-4 py-2.5 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:ring-1 focus:ring-secondary focus:border-secondary">
                             <option value="">Semua Status</option>
-                            <option value="terjadwal">Terjadwal</option>
                             <option value="selesai">Selesai</option>
-                            <option value="dibatalkan">Dibatalkan</option>
-                            <option value="menunggu">Menunggu Konfirmasi</option>
+                            <option value="belum">Belum</option>
                         </select>
                     </div>
                      <button class="bg-gray-600 hover:bg-gray-500 text-gray-200 px-4 py-2.5 rounded-lg font-medium flex items-center justify-center space-x-2 h-[46px] sm:h-auto sm:self-end">
@@ -69,8 +67,7 @@ require __DIR__ . '/components/html_head.php';
                             <tr class="bg-gray-700/50 text-left">
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tl-lg">Tanggal & Waktu</th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Calon Asisten</th>
-                                <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Pewawancara</th>
-                                <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Lokasi/Link</th>
+                                <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Keterangan</th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider rounded-tr-lg">Aksi</th>
                             </tr>
@@ -79,10 +76,10 @@ require __DIR__ . '/components/html_head.php';
                             <?php 
                             // Data dummy (Mata Kuliah telah dihapus dari array)
                             $jadwal_list = [
-                                ["id" => 1, "tanggal" => "2025-06-10", "waktu_mulai" => "09:00", "waktu_selesai" => "09:30", "nama_calon" => "Ahmad Fauzi", "nim_calon" => "201011400001", "pewawancara" => "Dr. Indah Permatasari", "lokasi" => "Ruang R.301", "status" => "Terjadwal"],
-                                ["id" => 2, "tanggal" => "2025-06-10", "waktu_mulai" => "10:00", "waktu_selesai" => "10:30", "nama_calon" => "Bunga Citra Lestari", "nim_calon" => "211011400002", "pewawancara" => "Prof. Budi Santoso", "lokasi" => "Online (Zoom)", "status" => "Selesai"],
-                                ["id" => 3, "tanggal" => "2025-06-11", "waktu_mulai" => "13:00", "waktu_selesai" => "13:45", "nama_calon" => "Eko Patrio", "nim_calon" => "201011400005", "pewawancara" => "Prof. Budi Santoso", "lokasi" => "GMeet Link", "status" => "Menunggu Konfirmasi"],
-                                ["id" => 4, "tanggal" => "2025-06-12", "waktu_mulai" => "11:00", "waktu_selesai" => "11:30", "nama_calon" => "Siti Aminah", "nim_calon" => "221011400007", "pewawancara" => "Dr. Rina Kusumawati", "lokasi" => "Ruang R.302", "status" => "Dibatalkan"],
+                                ["id" => 1, "tanggal" => "2025-06-10", "waktu_mulai" => "09:00", "waktu_selesai" => "09:30", "nama_calon" => "Ahmad Fauzi", "nim_calon" => "201011400001",  "Keterangan" => "Offline", "status" => "Selesai"],
+                                ["id" => 2, "tanggal" => "2025-06-10", "waktu_mulai" => "10:00", "waktu_selesai" => "10:30", "nama_calon" => "Bunga Citra Lestari", "nim_calon" => "211011400002", "Keterangan" => "Online", "status" => "Selesai"],
+                                ["id" => 3, "tanggal" => "2025-06-11", "waktu_mulai" => "13:00", "waktu_selesai" => "13:45", "nama_calon" => "Eko Patrio", "nim_calon" => "201011400005", "Keterangan" => "Offline", "status" => "Belum"],
+                                ["id" => 4, "tanggal" => "2025-06-12", "waktu_mulai" => "11:00", "waktu_selesai" => "11:30", "nama_calon" => "Siti Aminah", "nim_calon" => "221011400007", "Keterangan" => "Offline", "status" => "Belum"],
                             ];
 
                             if (empty($jadwal_list)): ?>
@@ -97,10 +94,8 @@ require __DIR__ . '/components/html_head.php';
                             <?php else:
                                 foreach ($jadwal_list as $jadwal): 
                                     $status_color = 'text-gray-400 bg-gray-600/30'; 
-                                    if ($jadwal['status'] == 'Terjadwal') $status_color = 'text-blue-400 bg-blue-500/20';
                                     if ($jadwal['status'] == 'Selesai') $status_color = 'text-green-400 bg-green-500/20';
-                                    if ($jadwal['status'] == 'Dibatalkan') $status_color = 'text-red-400 bg-red-500/20';
-                                    if ($jadwal['status'] == 'Menunggu Konfirmasi') $status_color = 'text-yellow-400 bg-yellow-500/20';
+                                    if ($jadwal['status'] == 'Belum') $status_color = 'text-red-400 bg-red-500/20';
                                 ?>
                                 <tr class="hover:bg-gray-700/50 transition-colors duration-150">
                                     <td class="px-6 py-4">
@@ -111,12 +106,11 @@ require __DIR__ . '/components/html_head.php';
                                         <div class="text-sm font-medium text-gray-100"><?= htmlspecialchars($jadwal['nama_calon']) ?></div>
                                         <div class="text-xs text-gray-400">NIM: <?= htmlspecialchars($jadwal['nim_calon']) ?></div>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-200"><?= htmlspecialchars($jadwal['pewawancara']) ?></td>
                                     <td class="px-6 py-4 text-sm text-gray-300">
-                                        <?php if (filter_var($jadwal['lokasi'], FILTER_VALIDATE_URL)): ?>
-                                            <a href="<?= htmlspecialchars($jadwal['lokasi']) ?>" target="_blank" class="text-secondary hover:underline"><?= htmlspecialchars(parse_url($jadwal['lokasi'], PHP_URL_HOST) ?: "Link Meeting") ?> <i class="ri-external-link-line text-xs"></i></a>
+                                        <?php if (filter_var($jadwal['Keterangan'], FILTER_VALIDATE_URL)): ?>
+                                            <a href="<?= htmlspecialchars($jadwal['Keterangan']) ?>" target="_blank" class="text-secondary hover:underline"><?= htmlspecialchars(parse_url($jadwal['lokasi'], PHP_URL_HOST) ?: "Link Meeting") ?> <i class="ri-external-link-line text-xs"></i></a>
                                         <?php else: ?>
-                                            <?= htmlspecialchars($jadwal['lokasi']) ?>
+                                            <?= htmlspecialchars($jadwal['Keterangan']) ?>
                                         <?php endif; ?>
                                     </td>
                                     <td class="px-6 py-4">

@@ -47,17 +47,17 @@ require 'components/html_head.php';
                 </div>
 
                 <div
-                    class="bg-gray-800 p-6 rounded-2xl shadow-xl hover:shadow-green-500/30 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between min-h-[160px]">
+                    class="bg-gray-800 p-6 rounded-2xl shadow-xl hover:shadow-yellow-500/30 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between min-h-[160px]">
                     <div class="flex items-center justify-between">
-                        <h3 class="text-gray-400 text-base font-medium">Lolos Seleksi</h3>
+                        <h3 class="text-gray-400 text-base font-medium">Mata Kuliah</h3>
                         <div
-                            class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-400">
+                            class="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400">
                             <i class="ri-user-follow-fill ri-xl"></i>
                         </div>
                     </div>
                     <div>
-                        <p class="text-5xl font-bold text-gray-50 mt-3">156</p>
-                        <p class="text-xs text-gray-500 mt-1">Pendaftar memenuhi kriteria awal.</p>
+                        <p class="text-5xl font-bold text-gray-50 mt-3">20</p>
+                        <p class="text-xs text-gray-500 mt-1">Yang dibuka pendaftaran asisten</p>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@ require 'components/html_head.php';
             <div class="bg-gray-800 rounded-xl shadow-lg mb-8">
                 <div class="p-6 border-b border-gray-700">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                        <h2 class="text-xl font-semibold text-gray-100 mb-2 sm:mb-0">Pendaftar Terbaru</h2>
+                        <h2 class="text-xl font-semibold text-gray-100 mb-2 sm:mb-0">Daftar Mata Kuliah</h2>
                         <a href="pendaftar.php"
                             class="text-secondary hover:text-yellow-500 font-medium text-sm inline-flex items-center">
                             Lihat Semua Pendaftar <i class="ri-arrow-right-s-line ml-1"></i>
@@ -76,7 +76,7 @@ require 'components/html_head.php';
                     <table class="w-full">
                         <thead>
                             <tr class="bg-gray-700/50 text-left">
-                                <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Nama
+                                <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Nama Mata Kuliah
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Status
                                 </th>
